@@ -27,9 +27,11 @@ CheckHostname() {
 		Linux )  _PING="ping -c1 $_HOST" ;;
 		* )      return 1                ;;
 	esac
-	if [ `$_PING 2>&1 | grep -ci "Unknown host"` -eq 0 ]; then
-		return 0
-	else
-		return 1
-	fi
+	$_PING > /dev/null 2>&1
+	return $?
+	#if [ `$_PING 2>&1 | grep -ci "Unknown host"` -eq 0 ]; then
+	#	return 0
+	#else
+	#	return 1
+	#fi
 }
